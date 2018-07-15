@@ -86,6 +86,7 @@ public class Main {
                 for (p = 0; p < 5; p++) {
                     Data objname2 = new Data(tablica1);
                     ListOfBooks.add(p,objname2);
+                objname2.ForArray(user.copiedUser);
                 }
 
                 break;
