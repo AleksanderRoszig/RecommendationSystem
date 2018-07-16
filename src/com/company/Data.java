@@ -22,32 +22,34 @@ public class Data {
         }
         for (int k = 0; k < copied.length; k++) {
             copiedData[k] = copied[k];
-            System.out.println(copiedData[k] + "     kopiowane: " + "a");
         }
     }
 
-    public void ForArray(int[] anotherarray) {
+    public void ForArray(int[] anotherarray) { //
         for (int i = 0; i < n; i++) {
             copiedUser[i] = anotherarray[i];
         }
     }
 
     public void recAlgo() {
-            for (int i = 0; i < copiedData.length; i++) {
-                counter = counter + (copiedData[i] + copiedUser[i]);
-
-                for(i = 0; i < copiedUser.length; i++) {
+        int i;
+            for (i = 1; i < copiedData.length; i++) {
+                counter = counter + (copiedData[i] * copiedUser[i]);
+                System.out.println(copiedUser[i]);
+            }
+                for(i = 1; i < copiedData.length; i++) {
                     sumA = sumA + Math.pow(copiedUser[i], 2);
                     sumB = sumB + Math.pow(copiedData[i], 2);
                 }
-
                 A = Math.sqrt(sumA);
                 B = Math.sqrt(sumB);
                 denominator = sumA + sumB;
                 dUD = counter / denominator;
-            }
         System.out.println("dUD: " + dUD);
+
     }
+
+
 }
 
     //@Override

@@ -13,6 +13,7 @@ public class Main {
         int n = 5; //number of features
         String inputS;
         int [] tab1 = new int[5];
+        int [] tab2 = {10,10,10,10,10};
         Scanner keyboard = new Scanner(System.in);
         int p = 5; //number of objects
         //  choice = keyboard.nextInt();
@@ -73,20 +74,15 @@ public class Main {
                     }
 
                 }
-
                 User user = new User(inputS, tab1);
-
-
-                Random r = new Random(); //for random generating features of sites/books etc.
+                User user1 = new User("name", tab2);
                 System.out.println(user.toString()); // user name output from User class, for tests
-
                 //random objects for test
                 int[] tablica1 = new int[n];
-
                 for (p = 0; p < 5; p++) {
                     Data objname2 = new Data(tablica1);
                     ListOfBooks.add(p,objname2);
-                objname2.ForArray(user.copiedUser);
+                    objname2.ForArray(user.copiedUser);
                 }
 
                 break;
