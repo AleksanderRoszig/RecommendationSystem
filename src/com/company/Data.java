@@ -1,8 +1,11 @@
 package com.company;
+
 import java.util.Random;
 import java.util.*;
+
 public class Data {
     private int ID;
+    String name;
     double dUD;
     double counter = 0;
     double denominator;
@@ -12,10 +15,13 @@ public class Data {
     double sumB = 0;
     int n = 5; //number of features
     Random r = new Random();
-    int[] copiedData = new int[5];
-    int[] copiedUser = new int[5];
+    double[] copiedData = new double[5];
+    double[] copiedUser = new double[5];
+    ArrayList<Data> ListOfBooks = new ArrayList<Data>(0);
+    ArrayList<Data> ListOfSortedBooks = new ArrayList<Data>(0);
 
-    public Data(int[] copied) {
+    //constructor for data array with random values
+    public Data(String name, double[] copied) {
         copied[0] = 69; //there should be ID of service/book etc.
         for (int i = 1; i < n; i++) {
             copied[i] = r.nextInt(11);
@@ -24,8 +30,16 @@ public class Data {
             copiedData[k] = copied[k];
         }
     }
+    //constructor for data array with normal values
+   /* public Data(String name, double[] copied) {
+       this.name = name;
+       for(int i = 1; i < n; i++){
+           copiedData[i] = copied[i];
+       }
 
-    public void ForArray(int[] anotherarray) { //
+   } */
+
+    public void ForArray(double[] anotherarray) { //
         for (int i = 0; i < n; i++) {
             copiedUser[i] = anotherarray[i];
         }
@@ -33,27 +47,42 @@ public class Data {
 
     public void recAlgo() {
         int i;
-            for (i = 1; i < copiedData.length; i++) {
-                counter = counter + (copiedData[i] * copiedUser[i]);
-                System.out.println(copiedUser[i]);
-            }
-                for(i = 1; i < copiedData.length; i++) {
-                    sumA = sumA + Math.pow(copiedUser[i], 2);
-                    sumB = sumB + Math.pow(copiedData[i], 2);
-                }
-                A = Math.sqrt(sumA);
-                B = Math.sqrt(sumB);
-                denominator = sumA + sumB;
-                dUD = counter / denominator;
-        System.out.println("dUD: " + dUD);
+        for (i = 1; i < copiedData.length; i++) {
+            counter = counter + (copiedData[i] * copiedUser[i]);
+        }
+        for (i = 1; i < copiedData.length; i++) {
+            sumA = sumA + Math.pow(copiedUser[i], 2);
+            sumB = sumB + Math.pow(copiedData[i], 2);
+        }
+        A = Math.sqrt(sumA);
+        B = Math.sqrt(sumB);
+        denominator = sumA + sumB;
+        dUD = counter / denominator;
+        copiedData[0] = dUD;
+    }
 
+    public void Start(Object object) {
+        ListOfBooks.add(0, Data.this);
+        Data.this.StartCalculations();
+
+    }
+
+    public void StartCalculations() {
+        for (int p = 0; p < 1; p++) {
+            ListOfBooks.get(p).recAlgo();
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String toString() {
+        return "Name of book: " + getName();
     }
 
 
 }
 
-    //@Override
-   /* public String toString(){
-        return //maybe return obj name?
-    }*/
+
 
