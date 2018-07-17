@@ -16,11 +16,6 @@ public class User {
         }
     }
 
-    public double[] getCopied(){
-       return copiedUser;
-    }
-
-
     public String toString(){
         return "ID: " + ID + "\n" + "Name: " + name + "\n" + "Surname: " + surname;
     }

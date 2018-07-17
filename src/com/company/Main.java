@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         List<User> ListOfUsers = new ArrayList<User>(0);
-        //ArrayList<Data> ListOfBooks = new ArrayList<Data>(0);
+        ArrayList<Data> ListOfBooks = new ArrayList<Data>(0);
         int choice;
         int n = 5; //number of features
         String inputS;
@@ -75,14 +75,23 @@ public class Main {
                     double[] tablica1 = new double[n];
                     for (p = 0; p < 5; p++) {
                         Data objname2 = new Data("Harry Potter", tablica1);
+                        ListOfBooks.add(p,objname2);
                         objname2.ForArray(user.copiedUser);
-                        objname2.Start(objname2);
                     }
+
+
                    /* double [] tablica1  = {0,10,10,10,10,10};
                     Data objname2 = new Data("book1", tablica1);
                     objname2.ForArray(user.copiedUser);
                     objname2.Start(objname2);
                     */
+
+                    for(p = 0; p < 5; p++){
+                        ListOfBooks.get(p).recAlgo();
+                    }
+
+
+                    System.out.println();
                     System.out.println("Do you want make calculations again?");
                     System.out.println("Y or N");
                     boolean goodletters;

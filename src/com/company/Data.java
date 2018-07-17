@@ -17,9 +17,6 @@ public class Data {
     Random r = new Random();
     double[] copiedData = new double[5];
     double[] copiedUser = new double[5];
-    ArrayList<Data> ListOfBooks = new ArrayList<Data>(0);
-    ArrayList<Data> ListOfSortedBooks = new ArrayList<Data>(0);
-
     //constructor for data array with random values
     public Data(String name, double[] copied) {
         copied[0] = 69; //there should be ID of service/book etc.
@@ -29,6 +26,7 @@ public class Data {
         for (int k = 0; k < copied.length; k++) {
             copiedData[k] = copied[k];
         }
+
     }
     //constructor for data array with normal values
    /* public Data(String name, double[] copied) {
@@ -59,19 +57,9 @@ public class Data {
         denominator = sumA + sumB;
         dUD = counter / denominator;
         copiedData[0] = dUD;
+        System.out.println(dUD);
     }
 
-    public void Start(Object object) {
-        ListOfBooks.add(0, Data.this);
-        Data.this.StartCalculations();
-
-    }
-
-    public void StartCalculations() {
-        for (int p = 0; p < 1; p++) {
-            ListOfBooks.get(p).recAlgo();
-        }
-    }
 
     public String getName() {
         return name;
