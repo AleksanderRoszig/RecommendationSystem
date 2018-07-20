@@ -1,12 +1,15 @@
 package com.company;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
     public static void main(String[] args) {
         List<User> ListOfUsers = new ArrayList<User>(0);
-        ArrayList<Data> ListOfBooks = new ArrayList<Data>(0);
+        List<Data> ListOfBooks = new ArrayList<Data>(0);
+        List<MemoryBased> ListOfData= new ArrayList<MemoryBased>(0);
+
         int choice;
         int n = 5; //number of features
         String inputS;
@@ -77,21 +80,24 @@ public class Main {
                         Data objname2 = new Data("Harry Potter", tablica1);
                         ListOfBooks.add(p,objname2);
                         objname2.ForArray(user.copiedUser);
+
+
                     }
-
-
-                   /* double [] tablica1  = {0,10,10,10,10,10};
+                    /* double [] tablica1  = {0,10,10,10,10,10};
                     Data objname2 = new Data("book1", tablica1);
                     objname2.ForArray(user.copiedUser);
                     objname2.Start(objname2);
                     */
-
                     for(p = 0; p < 5; p++){
-                        ListOfBooks.get(p).recAlgo();
+                        ListOfBooks.get(p).calcCosin();
                     }
 
+                    List<Data> ListOfSortedBooks = ListOfBooks.stream().sorted(Comparator.comparing(e->e.dUD)).collect(Collectors.toList());
 
-                    System.out.println();
+                    for(p = 0; p < 5; p++){
+                        System.out.println(ListOfSortedBooks.get(p).copiedData[0] + "     Sorted");
+                    }
+
                     System.out.println("Do you want make calculations again?");
                     System.out.println("Y or N");
                     boolean goodletters;

@@ -3,20 +3,24 @@ package com.company;
 import java.util.Random;
 import java.util.*;
 
+//Content-based Filtering
 public class Data {
-    private int ID;
+    int ID;
     String name;
-    double dUD;
-    double counter = 0;
-    double denominator;
-    double A;
-    double sumA = 0;
-    double B;
-    double sumB = 0;
-    int n = 5; //number of features
-    Random r = new Random();
+
+    //Cosine similarity
+    double dUD; //Cosine similarity beteween user and article
+    private double counter = 0;
+    private double denominator;
+    private double A;
+    private double sumA = 0;
+    private double B;
+    private double sumB = 0;
     double[] copiedData = new double[5];
-    double[] copiedUser = new double[5];
+    private double[] copiedUser = new double[5];
+    private int n = 5; //number of features
+    Random r = new Random();
+
     //constructor for data array with random values
     public Data(String name, double[] copied) {
         copied[0] = 69; //there should be ID of service/book etc.
@@ -36,14 +40,13 @@ public class Data {
        }
 
    } */
-
     public void ForArray(double[] anotherarray) { //
         for (int i = 0; i < n; i++) {
             copiedUser[i] = anotherarray[i];
         }
     }
-
-    public void recAlgo() {
+    //Contend-based Filtering and cosine similarity
+    public void calcCosin() {
         int i;
         for (i = 1; i < copiedData.length; i++) {
             counter = counter + (copiedData[i] * copiedUser[i]);
@@ -65,9 +68,7 @@ public class Data {
         return name;
     }
 
-    public String toString() {
-        return "Name of book: " + getName();
-    }
+
 
 
 }
