@@ -25,7 +25,7 @@ public class Data {
     public Data(String name, double[] copied) {
         copied[0] = 69; //there should be ID of service/book etc.
         for (int i = 1; i < n; i++) {
-            copied[i] = r.nextInt(11);
+            copied[i] = r.nextInt(10)+1;
         }
         for (int k = 0; k < copied.length; k++) {
             copiedData[k] = copied[k];
@@ -60,7 +60,6 @@ public class Data {
         denominator = sumA + sumB;
         dUD = counter / denominator;
         copiedData[0] = dUD;
-        System.out.println(dUD);
     }
 
 

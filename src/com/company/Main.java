@@ -18,11 +18,11 @@ public class Main {
         int p = 5; //number of objects
         //  choice = keyboard.nextInt();
         System.out.println("----------MENU----------");
-        System.out.println("1. Add user manually");
-        System.out.println("2. Delete user");
-        System.out.println("3. List of users");
-        System.out.println("4. Compare users");
-        System.out.println("5. Your profile");
+        System.out.println("1. ");
+        System.out.println("2. ");
+        System.out.println("3. ");
+        System.out.println("4. Memory-based Collaborative Filtering");
+        System.out.println("5. Content-based Filtering.");
         switch (5) {
             case 1:
                 System.out.println("Name: ");
@@ -38,6 +38,14 @@ public class Main {
                 }
                 break;
             case 4:
+                double[][] tablica2 = new double[5][5];
+                for(p = 0; p < 5; p++) {
+                    MemoryBased objname3 = new MemoryBased("one",tablica2);
+                    ListOfData.add(p,objname3);
+                }
+                  for(p = 0; p < 5; p++){
+                    ListOfData.get(p).calcPearson();
+                }
                 break;
             case 5:
                 boolean endingchoice;
@@ -80,9 +88,7 @@ public class Main {
                         Data objname2 = new Data("Harry Potter", tablica1);
                         ListOfBooks.add(p,objname2);
                         objname2.ForArray(user.copiedUser);
-
-
-                    }
+                        }
                     /* double [] tablica1  = {0,10,10,10,10,10};
                     Data objname2 = new Data("book1", tablica1);
                     objname2.ForArray(user.copiedUser);
@@ -91,12 +97,12 @@ public class Main {
                     for(p = 0; p < 5; p++){
                         ListOfBooks.get(p).calcCosin();
                     }
-
                     List<Data> ListOfSortedBooks = ListOfBooks.stream().sorted(Comparator.comparing(e->e.dUD)).collect(Collectors.toList());
 
                     for(p = 0; p < 5; p++){
                         System.out.println(ListOfSortedBooks.get(p).copiedData[0] + "     Sorted");
                     }
+
 
                     System.out.println("Do you want make calculations again?");
                     System.out.println("Y or N");
