@@ -1,15 +1,12 @@
 package com.company;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
-
     public static void main(String[] args) {
         List<User> ListOfUsers = new ArrayList<User>(0);
         List<Data> ListOfBooks = new ArrayList<Data>(0);
-        List<MemoryBased> ListOfData= new ArrayList<MemoryBased>(0);
-
+        List<MemoryBased> ListOfData = new ArrayList<MemoryBased>(0);
         int choice;
         int n = 5; //number of features
         String inputS;
@@ -18,36 +15,32 @@ public class Main {
         int p = 5; //number of objects
         //  choice = keyboard.nextInt();
         System.out.println("----------MENU----------");
-        System.out.println("1. ");
-        System.out.println("2. ");
-        System.out.println("3. ");
-        System.out.println("4. Memory-based Collaborative Filtering");
-        System.out.println("5. Content-based Filtering.");
-        switch (5) {
+        System.out.println("1. Memory-based Collaborative Filtering");
+        System.out.println("2. Content-based Filtering.");
+        switch (1) {
             case 1:
-                System.out.println("Name: ");
-                for (int i = 0; i < ListOfUsers.size() - 1; i++) {
-                    System.out.println(ListOfUsers.get(i).toString());
+                int[][] tablica2 = new int[5][5];
+                for (p = 0; p < 5; p++) {
+                    MemoryBased objname3 = new MemoryBased("one", tablica2);
+                    ListOfData.add(p, objname3);
+                }
+                for (p = 0; p < 5; p++) {
+                    ListOfData.get(p).calcPearson();
+                }
+                List<MemoryBased> ListOfSortedUsers = ListOfData.stream().sorted(Comparator.comparing(e -> e.norWPK)).collect(Collectors.toList());
+                for (p = 0; p < 5; p++) {
+                    System.out.println(ListOfSortedUsers.get(p).getNorWPK() + " testastasd");
+                }
+
+                for (p = 0; p < 5; p++) {
+                    ListOfSortedUsers.get(p).calcB();
+                }
+                System.out.println("\n");
+                for (p = 0; p < 5; p++) {
+                    ListOfSortedUsers.get(p).calcBest();
                 }
                 break;
             case 2:
-                break;
-            case 3:
-                for (int i = 0; i < ListOfUsers.size() - 1; i++) {
-                    System.out.println(ListOfUsers.get(i).toString());
-                }
-                break;
-            case 4:
-                double[][] tablica2 = new double[5][5];
-                for(p = 0; p < 5; p++) {
-                    MemoryBased objname3 = new MemoryBased("one",tablica2);
-                    ListOfData.add(p,objname3);
-                }
-                  for(p = 0; p < 5; p++){
-                    ListOfData.get(p).calcPearson();
-                }
-                break;
-            case 5:
                 boolean endingchoice;
                 do {
                     endingchoice = false;
@@ -86,24 +79,21 @@ public class Main {
                     double[] tablica1 = new double[n];
                     for (p = 0; p < 5; p++) {
                         Data objname2 = new Data("Harry Potter", tablica1);
-                        ListOfBooks.add(p,objname2);
+                        ListOfBooks.add(p, objname2);
                         objname2.ForArray(user.copiedUser);
-                        }
+                    }
                     /* double [] tablica1  = {0,10,10,10,10,10};
                     Data objname2 = new Data("book1", tablica1);
                     objname2.ForArray(user.copiedUser);
                     objname2.Start(objname2);
                     */
-                    for(p = 0; p < 5; p++){
+                    for (p = 0; p < 5; p++) {
                         ListOfBooks.get(p).calcCosin();
                     }
-                    List<Data> ListOfSortedBooks = ListOfBooks.stream().sorted(Comparator.comparing(e->e.dUD)).collect(Collectors.toList());
-
-                    for(p = 0; p < 5; p++){
+                    List<Data> ListOfSortedBooks = ListOfBooks.stream().sorted(Comparator.comparing(e -> e.dUD)).collect(Collectors.toList());
+                    for (p = 0; p < 5; p++) {
                         System.out.println(ListOfSortedBooks.get(p).copiedData[0] + "     Sorted");
                     }
-
-
                     System.out.println("Do you want make calculations again?");
                     System.out.println("Y or N");
                     boolean goodletters;

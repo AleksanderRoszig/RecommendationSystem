@@ -7,7 +7,6 @@ import java.util.*;
 public class Data {
     int ID;
     String name;
-
     //Cosine similarity
     double dUD; //Cosine similarity beteween user and article
     private double counter = 0;
@@ -25,13 +24,14 @@ public class Data {
     public Data(String name, double[] copied) {
         copied[0] = 69; //there should be ID of service/book etc.
         for (int i = 1; i < n; i++) {
-            copied[i] = r.nextInt(10)+1;
+            copied[i] = r.nextInt(10) + 1;
         }
         for (int k = 0; k < copied.length; k++) {
             copiedData[k] = copied[k];
         }
 
     }
+
     //constructor for data array with normal values
    /* public Data(String name, double[] copied) {
        this.name = name;
@@ -45,6 +45,7 @@ public class Data {
             copiedUser[i] = anotherarray[i];
         }
     }
+
     //Contend-based Filtering and cosine similarity
     public void calcCosin() {
         int i;
@@ -62,14 +63,9 @@ public class Data {
         copiedData[0] = dUD;
     }
 
-
     public String getName() {
         return name;
     }
-
-
-
-
 }
 
 
