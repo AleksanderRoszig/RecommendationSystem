@@ -11,6 +11,7 @@ public class MemoryBased {
     double norWPK; //Normalized Pearson correlaction
     double bestarticles; //coefficient that tells an iteam can be liked by user P
     int sumrates = 0;
+    public double calcbbbbb = 0;
     private double counter;
     private double denominator;
     private double sumA = 0;
@@ -21,6 +22,7 @@ public class MemoryBased {
     private double averageRatingInputK;
     private double userRatingSumP = 0;
     private double userRatingSumK = 0;
+    private double fraction = 0;
     //1 User, 2 User rating
     private int n = 5; //number of Users
     private int m = 5; //number of rated Articles
@@ -28,7 +30,7 @@ public class MemoryBased {
     private int z = 1; //other users, its user K
     int[][] copiedarray = new int[n][m];
     Random r = new Random();
-    double[][] userParray = new double[1][5];
+    double[][] userParray = new double[1][6];
     //private List<Integer> ListOfRates = new List<Integer>(0);
     int[] arrayofrates = new int[100];
     //todo user P array with and without rating
@@ -43,7 +45,6 @@ public class MemoryBased {
             for (int j = 0; j < n; j++) {
                 copiedarray[k][j] = UsersInputs[k][j];
             }
-            System.out.println(copiedarray[z][k]);
         }
         System.out.println("\n");
         //second array its rate of user P
@@ -52,13 +53,13 @@ public class MemoryBased {
         userParray[0][2] = 3;
         userParray[0][3] = 4;
         userParray[0][4] = 10;
+        //userParray[0][5] its free for not rated article
     }
 
     public void calcPearson() {
         for (int i = 0; i < m; i++) {
             userRatingSumP = userRatingSumP + userParray[0][i];
             userRatingSumK = userRatingSumK + copiedarray[z][i];
-            System.out.println(copiedarray[z][i] + " calcpearson");
         }
         System.out.println("\n");
         averageRatingInputP = (userRatingSumP / m);
@@ -91,42 +92,55 @@ public class MemoryBased {
     public void calcB() {
         sumrates = (sumrates + getnormRates());
         arrayofrates[0] = arrayofrates[0] + sumrates;
-        System.out.println(arrayofrates[0] + "ratesum");
-
     }
 
     private int getnormRates() {
         int summa = 0;
         for(int i = 0; i < n; i++) {
-            System.out.println(copiedarray[1][i] + " test getnorm");
             summa = summa + copiedarray[z][i];
         }
         return summa;
     }
-
+    //calculate weighted sum of ratings of users of article I for user P
     public void calcBest() {
         double counter = 0;
         double denominator = 0;
         double averagerateusrz = 0;
+        double rateuserki = 0;
         int k = 0;
-        //System.out.println(norWPK + " test2");
-        for (int i = 0; i < m; i++) {
-            System.out.println(copiedarray[z][i] + " calcBest");
-            averagerateusrz = averagerateusrz + copiedarray[z][i];
+        int o = 0; //article I
+        //todo
+        do {
+                rateuserki = copiedarray[z][o];
+            for (int i = 0; i < m; i++) {
+                averagerateusrz = averagerateusrz + copiedarray[z][i];
+            }
+            averagerateusrz = averagerateusrz + copiedarray[z][o];
+            averagerateusrz = (averagerateusrz / m);
+            counter = (rateuserki - averagerateusrz) * norWPK;
 
-        }
-        System.out.println("\n");
-        averagerateusrz = averagerateusrz / m;
-        //fault there should be calculations for all users K=/P copiedarray[z][k]
-        counter = counter + ((copiedarray[z][k] - averagerateusrz) * norWPK);
-        denominator = Math.abs(norWPK);
+            //denominator ok
+            denominator = Math.abs(norWPK);
+            fraction = fraction + (counter/denominator);
+            //------------------
 
-        bestarticles = counter / denominator;
+            double averagerateusrp = 0;
+            //average rate of all articles without article I for user P
+            for (int i = 0; i < m; i++) {
+                averagerateusrp = averagerateusrp + userParray[0][i];
+            }
+            calcbbbbb = (averagerateusrp / m) + fraction;
+            //System.out.println(calcbbbbb + " callasd");
+
+            o++;
+        }while(o < m);
     }
+
 
     public double getNorWPK() {
         return  norWPK;
     }
+
 
 
 }

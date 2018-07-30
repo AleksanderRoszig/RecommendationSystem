@@ -7,6 +7,7 @@ public class Main {
         List<User> ListOfUsers = new ArrayList<User>(0);
         List<Data> ListOfBooks = new ArrayList<Data>(0);
         List<MemoryBased> ListOfData = new ArrayList<MemoryBased>(0);
+
         int choice;
         int n = 5; //number of features
         String inputS;
@@ -28,9 +29,6 @@ public class Main {
                     ListOfData.get(p).calcPearson();
                 }
                 List<MemoryBased> ListOfSortedUsers = ListOfData.stream().sorted(Comparator.comparing(e -> e.norWPK)).collect(Collectors.toList());
-                for (p = 0; p < 5; p++) {
-                    System.out.println(ListOfSortedUsers.get(p).getNorWPK() + " testastasd");
-                }
 
                 for (p = 0; p < 5; p++) {
                     ListOfSortedUsers.get(p).calcB();
@@ -39,6 +37,8 @@ public class Main {
                 for (p = 0; p < 5; p++) {
                     ListOfSortedUsers.get(p).calcBest();
                 }
+                List<MemoryBased> ListOfSortedUsersANDweightedSum = ListOfSortedUsers.stream().sorted(Comparator.comparing(e -> e.calcbbbbb)).collect(Collectors.toList());
+
                 break;
             case 2:
                 boolean endingchoice;
