@@ -1,24 +1,52 @@
 package com.company;
+
 import java.util.*;
-import java.util.stream.Collectors;
+
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
-        List<User> ListOfUsers = new ArrayList<User>(0);
-        List<Data> ListOfBooks = new ArrayList<Data>(0);
-        List<MemoryBased> ListOfData = new ArrayList<MemoryBased>(0);
+        //I started from 1 because 0,0 thats dUD calculated for our user
+        double[][] dataBaseOfBooks = new double[][]{
+                //0  1  2  3  4  5  6  7  8  9 10
+                {0, 10, 5, 4, 0, 8, 0, 0, 0, 0, 0},  //horror
+                {0, 0, 2, 3, 0, 4, 0, 7, 0, 0, 0},
+                {0, 2, 8, 0, 4, 0, 0, 5, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 5, 0, 0, 0, 0, 9, 7, 4, 10}, //youtubemovie
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 2, 0, 5, 0, 0, 6, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0}, //gym movie
+                {0, 0, 2, 0, 3, 0, 2, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
 
+        double[][] dataBaseOfUsers = new double[][]{
+                //0  1  2  3  4  5  6  7  8  9 10
+                {0, 10, 5, 4, 0, 8, 0, 0, 0, 0, 0},
+                {0, 0, 2, 3, 0, 4, 0, 7, 0, 0, 0},
+                {0, 2, 8, 0, 4, 0, 0, 5, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 5, 0, 0, 0, 0, 9, 7, 4, 10},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 2, 0, 5, 0, 0, 6, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0},
+                {0, 0, 2, 0, 3, 0, 2, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        boolean endingchoice;
         int choice;
-        int n = 5; //number of features
+        int n = 10; //number of features
         String inputS;
-        double[] tab1 = new double[5];
+        double[][] userInputArray = new double[10][n + 1];
         Scanner keyboard = new Scanner(System.in);
-        int p = 5; //number of objects
         //  choice = keyboard.nextInt();
         System.out.println("----------MENU----------");
         System.out.println("1. Memory-based Collaborative Filtering");
         System.out.println("2. Content-based Filtering.");
-        switch (1) {
+        switch (2) {
+            /*
             case 1:
                 int[][] tablica2 = new int[5][5];
                 for (p = 0; p < 5; p++) {
@@ -34,65 +62,72 @@ public class Main {
                     ListOfSortedUsers.get(p).calcB();
                 }
                 System.out.println("\n");
-                for (p = 0; p < 5; p++) {
-                    ListOfSortedUsers.get(p).calcBest();
-                }
-                List<MemoryBased> ListOfSortedUsersANDweightedSum = ListOfSortedUsers.stream().sorted(Comparator.comparing(e -> e.calcbbbbb)).collect(Collectors.toList());
 
+                    ListOfSortedUsers.get(0).calcBest();
+                   List<MemoryBased> ListOfSortedUsersANDweightedSum = ListOfSortedUsers.stream().sorted(Comparator.comparing(e -> e.calcbbbbb)).collect(Collectors.toList());
+
+                for (p = 0; p < 5; p++) {
+                    System.out.println(ListOfSortedUsersANDweightedSum.get(p).calcbbbbb);
+                }
                 break;
+                */
             case 2:
-                boolean endingchoice;
                 do {
+                    int i;
                     endingchoice = false;
                     System.out.println("Your name: ");
                     inputS = keyboard.next();
-                    for (int i = 0; i < n - 1; i++) {
-                        System.out.println("Your preferences 1-10");
-                        for (i = 0; i < n; i++) {
-                            switch (i) {
-                                case 1:
-                                    System.out.println("Do you like horrors?");
-                                    tab1[i] = keyboard.nextInt();
-                                    break;
-                                case 2:
-                                    System.out.println("Do you like sci-fi?");
-                                    tab1[i] = keyboard.nextInt();
-                                    break;
-                                case 3:
-                                    System.out.println("Do you like philosophy?");
-                                    tab1[i] = keyboard.nextInt();
-                                    break;
-                                case 4:
-                                    System.out.println("Do you like fantasy?");
-                                    tab1[i] = keyboard.nextInt();
-                                    break;
-                                case 5:
-                                    System.out.println("Do you like thriller?");
-                                    tab1[i] = keyboard.nextInt();
-                                    break;
-                            }
+                    System.out.println("Your preferences 1-10");
+                    for (i = 1; i < n + 1; i++) {
+                        switch (i) {
+                            case 1:
+                                System.out.println("Do you like horrors?");
+                                userInputArray[0][i] = keyboard.nextInt();
+                                break;
+                            case 2:
+                                System.out.println("Do you like sci-fi?");
+                                userInputArray[0][i] = keyboard.nextInt();
+                                break;
+                            case 3:
+                                System.out.println("Do you like philosophy?");
+                                userInputArray[0][i] = keyboard.nextInt();
+                                break;
+                            case 4:
+                                System.out.println("Do you like fantasy?");
+                                userInputArray[0][i] = keyboard.nextInt();
+                                break;
+                            case 5:
+                                System.out.println("Do you like thriller?");
+                                userInputArray[0][i] = keyboard.nextInt();
+                                break;
+                            case 6:
+                                System.out.println("Do you like history?");
+                                userInputArray[0][i] = keyboard.nextInt();
+                                break;
+                            case 7:
+                                System.out.println("Do you like cats?");
+                                userInputArray[0][i] = keyboard.nextInt();
+                                break;
+                            case 8:
+                                System.out.println("Do you like puppies?");
+                                userInputArray[0][i] = keyboard.nextInt();
+                                break;
+                            case 9:
+                                System.out.println("Do you like gym?");
+                                userInputArray[0][i] = keyboard.nextInt();
+                                break;
+                            case 10:
+                                System.out.println("Do you like YouTube?");
+                                userInputArray[0][i] = keyboard.nextInt();
+                                break;
                         }
                     }
-                    User user = new User(inputS, tab1);
-                    System.out.println(user.toString()); // user name output from User class, for tests
-                    //random objects for test
-                    double[] tablica1 = new double[n];
-                    for (p = 0; p < 5; p++) {
-                        Data objname2 = new Data("Harry Potter", tablica1);
-                        ListOfBooks.add(p, objname2);
-                        objname2.ForArray(user.copiedUser);
-                    }
-                    /* double [] tablica1  = {0,10,10,10,10,10};
-                    Data objname2 = new Data("book1", tablica1);
-                    objname2.ForArray(user.copiedUser);
-                    objname2.Start(objname2);
-                    */
-                    for (p = 0; p < 5; p++) {
-                        ListOfBooks.get(p).calcCosin();
-                    }
-                    List<Data> ListOfSortedBooks = ListOfBooks.stream().sorted(Comparator.comparing(e -> e.dUD)).collect(Collectors.toList());
-                    for (p = 0; p < 5; p++) {
-                        System.out.println(ListOfSortedBooks.get(p).copiedData[0] + "     Sorted");
+                    User user = new User(inputS, userInputArray);
+                    ContentBased test = new ContentBased(userInputArray, dataBaseOfBooks);
+                    //todo products
+                    test.bubbleSort(dataBaseOfBooks);
+                    for (i = 0; i < dataBaseOfBooks.length; i++) {
+                        System.out.println(dataBaseOfBooks[i][0] + "  :dUD sorted");
                     }
                     System.out.println("Do you want make calculations again?");
                     System.out.println("Y or N");
