@@ -2,8 +2,7 @@ package com.company;
 
 //Memory-based Collaborative Filtering
 public class MemoryBased {
-    //Pearson correlation coefficient
-    double Wpk; //Pearson correlation coefficient between user P and user K
+    double Wpk; //Pearson correlation coefficient between user ComparedUSer and user DataBase
     double norWPK; //Normalized Pearson correlaction
     private double counter1;
     private double denominator1;
@@ -29,26 +28,34 @@ public class MemoryBased {
     int id; //idUser from dataBaseOfUsers
     private int howMuchProductsBothUsersRated;
     int howMuchProductsComparedUserRated;
-    int[] productsRatedByBothUsers = new int[100];
-    int[] arrayOfValues = new int[10000]; //check how big it should be later
+    int[] productsRatedByBothUsers = new int[11];
+
 
     //check how much products rated by both users
-    private int howMuchProductsBothUsersRated(double[][] comparedUser, double[][] dataBase) {
+    private void whichProductsAreRatedByBothUsers(double[][] comparedUser, double[][] dataBase, int id) {
         double a;
         double b;
+        this.id = id;
         for (i = 1; i < comparedUser.length; i++) {
             a = comparedUser[i][0];
-            b = dataBase[id][i]; //something wrong with id value
+            b = dataBase[id][i];
             if (a * b == 0) {
                 productsRatedByBothUsers[i] = 0;
             } else
                 productsRatedByBothUsers[i] = 1;
         }
+    }//working good
+
+
+    private int howMuchProductsBothUsersRated() {
+        howMuchProductsBothUsersRated = 0;
         for (i = 1; i < productsRatedByBothUsers.length; i++) {
             howMuchProductsBothUsersRated = howMuchProductsBothUsersRated + productsRatedByBothUsers[i];
         }
         return howMuchProductsBothUsersRated;
-    }
+    }//working good
+
+    //tutaj wychodzi howmuch = 0 cały czas
 
     //check how much products rated by user ComparedUser
     private int howMuchProductsCompaRated(double[][] comparedUser) {
@@ -80,34 +87,41 @@ public class MemoryBased {
 
     //comparedUser that's our user from User class, DataBase that's for comparing
     public MemoryBased(double[][] comparedUser, double[][] dataBase) {
-        counter2 = 0;
-        denominator2 = 0;
-        weightedRating = 0;
-        averageRatingExI = 0;
+        id = 0; //check this for for todo
+        whichProductsAreRatedByBothUsers(comparedUser,dataBase, id);
 
         //Calculate Pearson correlation coefficient
-        for(int id = 0; id < dataBase.length; id++){
+        for(int id = 0; id < 1; id++){
+            counter2 = 0;
+            denominator2 = 0;
+            weightedRating = 0;
+            averageRatingExI = 0;
+            inputUserRatingSumP = 0;
+            comparedUserRatingSumK = 0;
+
         for (i = 1; i < comparedUser.length; i++) {
-            inputUserRatingSumP = inputUserRatingSumP + comparedUser[i][0];
-            comparedUserRatingSumK = comparedUserRatingSumK + dataBase[id][i];
+                inputUserRatingSumP = inputUserRatingSumP + comparedUser[i][0];
+                comparedUserRatingSumK = comparedUserRatingSumK + dataBase[id][i];
         }
-        averageRatingInputUser = (inputUserRatingSumP / howMuchProductsBothUsersRated(comparedUser, dataBase));
-        averageRatingComparedUser = (comparedUserRatingSumK / howMuchProductsBothUsersRated(comparedUser, dataBase));
+        averageRatingInputUser = (inputUserRatingSumP / comparedUser.length);
+        averageRatingComparedUser = (comparedUserRatingSumK / comparedUser.length);
+
+        //------------------------sprawdzić w dół
 
         //sumA = left side of counter, sumB = right side of counter
-        for (int i = 1; i < m; i++) {
+        for (i = 1; i < comparedUser.length; i++) {
             if (productsRatedByBothUsers[i] == 1) {
                 sumA = sumA + (comparedUser[i][0] - averageRatingInputUser);
                 sumB = sumB + (dataBase[id][i] - averageRatingComparedUser);
             }
-        }
+        }//end for(int i)
         counter1 = sumA * sumB;
-        for (int i = 1; i < m; i++) {
+        for (i = 1; i < comparedUser.length; i++) {
             if (productsRatedByBothUsers[i] == 1) {
                 sumDA = sumDA + Math.sqrt(Math.pow(comparedUser[i][0] - averageRatingInputUser, 2));
                 sumDB = sumDB + Math.sqrt(Math.pow(dataBase[id][i] - averageRatingComparedUser, 2));
             }
-        }
+        }//end for(int i)
             denominator1 = sumDA * sumDB;
             Wpk = counter1 / denominator1;
             //end Calculate Pearson correlation coefficient
@@ -116,7 +130,7 @@ public class MemoryBased {
             int q = 2; //this parameter specifies how much should be emphasized difference
             norWPK = Wpk * Math.pow(Math.abs(Wpk), q - 1);
             arrayofNorWpk[id] = norWPK; //check this id!!todo
-        }
+        }//end for(id)
 
             //end emphasing
             //-------------------------------------------^ good
@@ -126,9 +140,9 @@ public class MemoryBased {
             for (int k = 0; k < dataBase.length; k++) {
                 counter2 = counter2 + (dataBase[id][itemI] - averageDataBaUsrI(dataBase, itemI, id)) * arrayofNorWpk[id];
                 denominator2 = denominator2 + Math.abs(norWPK);
-
+            }
                 weighted[itemI] = averageComparedUsrI(comparedUser, itemI) + counter2 / denominator2;
                 System.out.println(weighted[itemI]);
-            }
+
         }
     }

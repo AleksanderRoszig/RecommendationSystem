@@ -40,8 +40,8 @@ public class Main {
         double[][] dataBaseOfUsers = new double[][]{
                 //[] ID of User [] rate of products
                 //0  1  2  3  4  5  6  7  8  9 10
-                {0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0},
-                {0, 0, 2, 3, 0, 4, 0, 7, 0, 0, 0},
+                {5, 1, 1, 2, 0, 2, 0, 7, 8, 9, 13},
+                {1, 1, 2, 3, 0, 4, 0, 7, 0, 0, 0},
                 {0, 0, 8, 0, 4, 0, 0, 5, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 5, 0, 0, 0, 0, 9, 7, 4, 10},
@@ -108,6 +108,8 @@ public class Main {
                     }
 
                     MemoryBased test1 = new MemoryBased(userInputArray, dataBaseOfUsers);
+
+
 
                     endingchoice = false;
                     do {
